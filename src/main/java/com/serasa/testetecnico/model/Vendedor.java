@@ -28,7 +28,7 @@ public class Vendedor {
     private String telefone;
 
     @Column
-    private LocalDate dataNascimento;
+    private Integer idade;
 
     @Column
     private String cidade;
@@ -40,5 +40,8 @@ public class Vendedor {
     private String regiao;
 
     @Builder.Default
-    private LocalDateTime criadoEm = LocalDateTime.now();
+    private LocalDateTime dataInclusao = LocalDateTime.now();
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Atuacao atuacao;
 }
