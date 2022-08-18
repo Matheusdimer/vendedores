@@ -1,5 +1,6 @@
 package com.serasa.testetecnico.service;
 
+import com.serasa.testetecnico.exception.EntityNotFoundException;
 import com.serasa.testetecnico.model.Vendedor;
 import com.serasa.testetecnico.model.dto.VendedorView;
 import com.serasa.testetecnico.repository.VendedorRepository;
@@ -69,6 +70,27 @@ public class VendedorServiceTest {
         assertNotNull(vendedor);
 
         verify(repository).findById(eq(1));
+    }
+
+    @Test
+    public void deveAtualizar() {
+        when(repository.existsById(anyInt())).thenReturn(true);
+
+        Vendedor update = service.update(vendedor);
+
+        assertNotNull(update);
+
+        verify(repository).existsById(eq(vendedor.getId()));
+        verify(repository).save(eq(vendedor));
+    }
+
+    @Test
+    public void deveLancarExceptioAtualizar() {
+        when(repository.existsById(anyInt())).thenReturn(false);
+
+        EntityNotFoundException exception = assertThrows(EntityNotFoundException.class, () -> service.update(vendedor));
+
+        assertEquals("Vendedor id 5 não encontrado", exception.getMessage());
     }
 
     @Test
