@@ -1,25 +1,23 @@
 package com.serasa.testetecnico.service;
 
 import com.serasa.testetecnico.model.Atuacao;
-import com.serasa.testetecnico.model.Vendedor;
 import com.serasa.testetecnico.repository.AtuacaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
 public class AtuacaoService {
     private AtuacaoRepository repository;
-    private VendedorService vendedorService;
 
-    public Atuacao create(Integer idVendedor, Atuacao atuacao) {
-        Vendedor vendedor = vendedorService.findById(idVendedor);
-        atuacao = repository.save(atuacao.toBuilder()
-                .vendedor(vendedor)
-                .build());
+    public Atuacao create(Atuacao atuacao) {
+        return repository.save(atuacao);
+    }
 
-        vendedor.setAtuacao(atuacao);
-        vendedorService.update(vendedor);
-        return atuacao;
+    public Set<String> getEstadosAtuacao(String regiao) {
+        return repository.findByRegiao(regiao).map(Atuacao::getEstados).orElse(Collections.emptySet());
     }
 }

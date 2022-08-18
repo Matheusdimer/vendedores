@@ -2,7 +2,7 @@ package com.serasa.testetecnico.service;
 
 import com.serasa.testetecnico.exception.EntityNotFoundException;
 import com.serasa.testetecnico.model.Vendedor;
-import com.serasa.testetecnico.model.dto.VendedorView;
+import com.serasa.testetecnico.model.dto.VendedorDto;
 import com.serasa.testetecnico.repository.VendedorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,7 +45,7 @@ public class VendedorServiceTest {
     @Test
     public void deveBuscarVendedores() {
         Pageable pageable = PageRequest.of(0, 20);
-        Page<VendedorView> vendedores = service.findAll(pageable);
+        Page<VendedorDto> vendedores = service.findAll(pageable);
 
         assertFalse(vendedores.isEmpty());
         assertEquals(1, vendedores.getSize());

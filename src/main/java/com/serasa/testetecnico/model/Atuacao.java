@@ -1,6 +1,5 @@
 package com.serasa.testetecnico.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -21,10 +20,6 @@ public class Atuacao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    @JsonBackReference
-    @OneToOne(mappedBy = "atuacao", cascade = CascadeType.ALL)
-    private Vendedor vendedor;
 
     @Column
     private String regiao;
