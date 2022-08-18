@@ -6,6 +6,7 @@ import com.serasa.teste.model.dto.VendedorDto;
 import com.serasa.teste.repository.VendedorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -31,6 +32,9 @@ public class VendedorServiceTest {
     @MockBean
     private VendedorRepository repository;
 
+    @Mock
+    private VendedorDto vendedorDto;
+
     private Vendedor vendedor;
 
     @BeforeEach
@@ -38,8 +42,9 @@ public class VendedorServiceTest {
         vendedor = criarVendedor();
 
         when(repository.save(any(Vendedor.class))).thenReturn(vendedor);
-        when(repository.findAll(any(Pageable.class))).thenReturn(new PageImpl<>(Collections.singletonList(vendedor)));
-        when(repository.findById(anyInt())).thenReturn(Optional.of(vendedor));
+        when(repository.findAllBy(any(Pageable.class), eq(VendedorDto.class)))
+                .thenReturn(new PageImpl<>(Collections.singletonList(vendedorDto)));
+        when(repository.findById(anyInt(), eq(VendedorDto.class))).thenReturn(Optional.of(vendedorDto));
     }
 
     @Test
@@ -51,7 +56,7 @@ public class VendedorServiceTest {
         assertEquals(1, vendedores.getSize());
         assertTrue(vendedores.getContent().stream().findFirst().isPresent());
 
-        verify(repository).findAll(eq(pageable));
+        verify(repository).findAllBy(eq(pageable), eq(VendedorDto.class));
     }
 
     @Test
@@ -65,11 +70,11 @@ public class VendedorServiceTest {
 
     @Test
     public void deveBuscarVendedor() {
-        Vendedor vendedor = service.findById(1);
+        Optional<VendedorDto> vendedor = service.findById(1);
 
-        assertNotNull(vendedor);
+        assertTrue(vendedor.isPresent());
 
-        verify(repository).findById(eq(1));
+        verify(repository).findById(eq(1), eq(VendedorDto.class));
     }
 
     @Test

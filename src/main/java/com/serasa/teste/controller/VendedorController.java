@@ -24,7 +24,7 @@ public class VendedorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<VendedorDto> findById(@PathVariable int id) {
-        return service.findByIdDto(id)
+        return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.noContent().build());
     }

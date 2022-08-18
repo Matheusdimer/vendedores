@@ -27,11 +27,7 @@ public class VendedorService {
         return vendedores;
     }
 
-    public Vendedor findById(Integer id) {
-        return repository.findById(id).orElseThrow(EntityNotFoundException::new);
-    }
-
-    public Optional<VendedorDto> findByIdDto(Integer id) {
+    public Optional<VendedorDto> findById(Integer id) {
         Optional<VendedorDto> vendedorDto = repository.findById(id, VendedorDto.class);
         vendedorDto.ifPresent(this::associateEstados);
         return vendedorDto;
