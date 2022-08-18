@@ -1,4 +1,4 @@
-package com.serasa.testetecnico.exception;
+package com.serasa.teste.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

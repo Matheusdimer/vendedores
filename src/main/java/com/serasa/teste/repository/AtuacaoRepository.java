@@ -1,6 +1,6 @@
-package com.serasa.testetecnico.repository;
+package com.serasa.teste.repository;
 
-import com.serasa.testetecnico.model.Atuacao;
+import com.serasa.teste.model.Atuacao;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

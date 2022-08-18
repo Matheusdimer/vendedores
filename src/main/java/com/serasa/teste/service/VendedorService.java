@@ -1,9 +1,9 @@
-package com.serasa.testetecnico.service;
+package com.serasa.teste.service;
 
-import com.serasa.testetecnico.exception.EntityNotFoundException;
-import com.serasa.testetecnico.model.Vendedor;
-import com.serasa.testetecnico.model.dto.VendedorDto;
-import com.serasa.testetecnico.repository.VendedorRepository;
+import com.serasa.teste.exception.EntityNotFoundException;
+import com.serasa.teste.model.Vendedor;
+import com.serasa.teste.model.dto.VendedorDto;
+import com.serasa.teste.repository.VendedorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

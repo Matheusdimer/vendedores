@@ -1,7 +1,7 @@
-package com.serasa.testetecnico.service;
+package com.serasa.teste.service;
 
-import com.serasa.testetecnico.model.Atuacao;
-import com.serasa.testetecnico.repository.AtuacaoRepository;
+import com.serasa.teste.model.Atuacao;
+import com.serasa.teste.repository.AtuacaoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

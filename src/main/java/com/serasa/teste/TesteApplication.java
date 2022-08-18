@@ -1,13 +1,13 @@
-package com.serasa.testetecnico;
+package com.serasa.teste;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class TestetecnicoApplication {
+public class TesteApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(TestetecnicoApplication.class, args);
+        SpringApplication.run(TesteApplication.class, args);
     }
 
 }

@@ -1,4 +1,4 @@
-package com.serasa.testetecnico.exception;
+package com.serasa.teste.exception;
 
 public class EntityNotFoundException extends RuntimeException {
     public EntityNotFoundException() {

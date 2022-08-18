@@ -1,4 +1,4 @@
-package com.serasa.testetecnico.model.dto;
+package com.serasa.teste.model.dto;
 
 import lombok.Getter;
 

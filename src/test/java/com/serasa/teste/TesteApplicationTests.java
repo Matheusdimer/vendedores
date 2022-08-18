@@ -1,10 +1,10 @@
-package com.serasa.testetecnico;
+package com.serasa.teste;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class TestetecnicoApplicationTests {
+class TesteApplicationTests {
 
     @Test
     void contextLoads() {

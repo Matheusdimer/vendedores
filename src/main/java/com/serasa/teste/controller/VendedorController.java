@@ -1,8 +1,8 @@
-package com.serasa.testetecnico.controller;
+package com.serasa.teste.controller;
 
-import com.serasa.testetecnico.model.Vendedor;
-import com.serasa.testetecnico.model.dto.VendedorDto;
-import com.serasa.testetecnico.service.VendedorService;
+import com.serasa.teste.model.Vendedor;
+import com.serasa.teste.model.dto.VendedorDto;
+import com.serasa.teste.service.VendedorService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

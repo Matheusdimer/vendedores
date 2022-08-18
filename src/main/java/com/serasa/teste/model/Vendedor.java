@@ -1,4 +1,4 @@
-package com.serasa.testetecnico.model;
+package com.serasa.teste.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

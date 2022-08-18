@@ -1,7 +1,7 @@
-package com.serasa.testetecnico.controller;
+package com.serasa.teste.controller;
 
-import com.serasa.testetecnico.model.Atuacao;
-import com.serasa.testetecnico.service.AtuacaoService;
+import com.serasa.teste.model.Atuacao;
+import com.serasa.teste.service.AtuacaoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
