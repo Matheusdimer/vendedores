@@ -22,6 +22,13 @@ public class VendedorController {
         return service.findAll(pageable);
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<VendedorDto> findById(@PathVariable int id) {
+        return service.findByIdDto(id)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.noContent().build());
+    }
+
     @PostMapping
     public ResponseEntity<Vendedor> create(@RequestBody Vendedor vendedor) {
         Vendedor saved = service.create(vendedor);

@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,16 +22,24 @@ public class VendedorService {
     public Page<VendedorDto> findAll(Pageable pageable) {
         final Page<VendedorDto> vendedores = repository.findAllBy(pageable, VendedorDto.class);
 
-        vendedores.forEach(vendedor -> {
-            Set<String> estados = atuacaoService.getEstadosAtuacao(vendedor.getRegiao());
-            vendedor.setEstados(estados);
-        });
+        vendedores.forEach(this::associateEstados);
 
         return vendedores;
     }
 
     public Vendedor findById(Integer id) {
         return repository.findById(id).orElseThrow(EntityNotFoundException::new);
+    }
+
+    public Optional<VendedorDto> findByIdDto(Integer id) {
+        Optional<VendedorDto> vendedorDto = repository.findById(id, VendedorDto.class);
+        vendedorDto.ifPresent(this::associateEstados);
+        return vendedorDto;
+    }
+
+    private void associateEstados(VendedorDto vendedor) {
+        Set<String> estados = atuacaoService.getEstadosAtuacao(vendedor.getRegiao());
+        vendedor.setEstados(estados);
     }
 
     public Vendedor create(Vendedor vendedor) {
