@@ -17,7 +17,7 @@ public class AtuacaoController {
     private AtuacaoService service;
 
     @PostMapping
-    public ResponseEntity<Atuacao> createAtuacao(@RequestBody Atuacao atuacao) {
+    public ResponseEntity<Atuacao> create(@RequestBody Atuacao atuacao) {
         Atuacao saved = service.create(atuacao);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);
     }
