@@ -1,6 +1,7 @@
 package com.serasa.testetecnico.service;
 
 import com.serasa.testetecnico.model.Vendedor;
+import com.serasa.testetecnico.model.dto.VendedorView;
 import com.serasa.testetecnico.repository.VendedorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
-import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -44,7 +44,7 @@ public class VendedorServiceTest {
     @Test
     public void deveBuscarVendedores() {
         Pageable pageable = PageRequest.of(0, 20);
-        Page<Vendedor> vendedores = service.findAll(pageable);
+        Page<VendedorView> vendedores = service.findAll(pageable);
 
         assertFalse(vendedores.isEmpty());
         assertEquals(1, vendedores.getSize());
@@ -82,7 +82,7 @@ public class VendedorServiceTest {
         return Vendedor.builder()
                 .id(5)
                 .nome("Fulano")
-                .dataNascimento(LocalDate.of(2001, 12, 6))
+                .idade(18)
                 .telefone("48988888888")
                 .regiao("sul")
                 .estado("SC")

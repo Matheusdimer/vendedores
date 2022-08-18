@@ -1,16 +1,16 @@
 package com.serasa.testetecnico.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -42,6 +42,12 @@ public class Vendedor {
     @Builder.Default
     private LocalDateTime dataInclusao = LocalDateTime.now();
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "ATUACAO_ID")
     private Atuacao atuacao;
+
+    public void setAtuacao(final Atuacao atuacao) {
+        this.atuacao = atuacao;
+    }
 }
