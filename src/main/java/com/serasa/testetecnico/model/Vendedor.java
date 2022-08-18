@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
 @Getter
@@ -20,24 +21,30 @@ public class Vendedor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column
+    @NotNull
+    @Column(nullable = false)
     private String nome;
 
     @Column
     private String telefone;
 
+    @NotNull
     @Column
     private Integer idade;
 
-    @Column
+    @NotNull
+    @Column(nullable = false)
     private String cidade;
 
-    @Column
+    @NotNull
+    @Column(nullable = false)
     private String estado;
 
-    @Column
+    @NotNull
+    @Column(nullable = false)
     private String regiao;
 
     @Builder.Default
+    @Column(nullable = false)
     private LocalDateTime dataInclusao = LocalDateTime.now();
 }

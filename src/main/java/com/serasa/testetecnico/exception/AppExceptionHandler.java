@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
+
 @ControllerAdvice
 public class AppExceptionHandler {
     private final Logger LOGGER = LoggerFactory.getLogger(getClass());
@@ -13,6 +15,14 @@ public class AppExceptionHandler {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<Void> handleEntityNotFound(EntityNotFoundException exception) {
         return ResponseEntity.noContent().build();
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<ApiError> handleConstraintException(ConstraintViolationException exception) {
+        String message = String.join(", ", exception.getConstraintViolations().stream()
+                .map(violation -> String.format("%s %s", violation.getPropertyPath(), violation.getMessage()))
+                .toArray(String[]::new));
+        return ResponseEntity.unprocessableEntity().body(new ApiError(message, 422));
     }
 
     @ExceptionHandler(Exception.class)
