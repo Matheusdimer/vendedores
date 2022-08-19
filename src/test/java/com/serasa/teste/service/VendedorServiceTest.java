@@ -3,6 +3,7 @@ package com.serasa.teste.service;
 import com.serasa.teste.exception.EntityNotFoundException;
 import com.serasa.teste.model.Vendedor;
 import com.serasa.teste.model.dto.VendedorDto;
+import com.serasa.teste.model.dto.VendedorSimplificadoDto;
 import com.serasa.teste.repository.VendedorRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -70,11 +71,11 @@ public class VendedorServiceTest {
 
     @Test
     public void deveBuscarVendedor() {
-        Optional<VendedorDto> vendedor = service.findById(1);
+        Optional<VendedorSimplificadoDto> vendedor = service.findById(1);
 
         assertTrue(vendedor.isPresent());
 
-        verify(repository).findById(eq(1), eq(VendedorDto.class));
+        verify(repository).findById(eq(1));
     }
 
     @Test

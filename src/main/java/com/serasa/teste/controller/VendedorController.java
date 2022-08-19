@@ -2,6 +2,7 @@ package com.serasa.teste.controller;
 
 import com.serasa.teste.model.Vendedor;
 import com.serasa.teste.model.dto.VendedorDto;
+import com.serasa.teste.model.dto.VendedorSimplificadoDto;
 import com.serasa.teste.service.VendedorService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -23,7 +24,7 @@ public class VendedorController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<VendedorDto> findById(@PathVariable int id) {
+    public ResponseEntity<VendedorSimplificadoDto> findById(@PathVariable int id) {
         return service.findById(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.noContent().build());

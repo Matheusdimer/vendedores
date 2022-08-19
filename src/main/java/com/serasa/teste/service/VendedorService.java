@@ -3,6 +3,7 @@ package com.serasa.teste.service;
 import com.serasa.teste.exception.EntityNotFoundException;
 import com.serasa.teste.model.Vendedor;
 import com.serasa.teste.model.dto.VendedorDto;
+import com.serasa.teste.model.dto.VendedorSimplificadoDto;
 import com.serasa.teste.repository.VendedorRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -20,20 +21,21 @@ public class VendedorService {
     private final AtuacaoService atuacaoService;
 
     public Page<VendedorDto> findAll(Pageable pageable) {
-        final Page<VendedorDto> vendedores = repository.findAllBy(pageable, VendedorDto.class);
+        Page<VendedorDto> vendedores = repository.findAllBy(pageable, VendedorDto.class);
 
-        vendedores.forEach(this::associateEstados);
-
+        vendedores.forEach(this::associarEstados);
         return vendedores;
     }
 
-    public Optional<VendedorDto> findById(Integer id) {
-        Optional<VendedorDto> vendedorDto = repository.findById(id, VendedorDto.class);
-        vendedorDto.ifPresent(this::associateEstados);
-        return vendedorDto;
+    public Optional<VendedorSimplificadoDto> findById(Integer id) {
+        Optional<Vendedor> vendedorDto = repository.findById(id);
+        return vendedorDto.map(vendedor -> new VendedorSimplificadoDto(
+                vendedor,
+                atuacaoService.getEstadosAtuacao(vendedor.getRegiao())
+        ));
     }
 
-    private void associateEstados(VendedorDto vendedor) {
+    private void associarEstados(VendedorDto vendedor) {
         Set<String> estados = atuacaoService.getEstadosAtuacao(vendedor.getRegiao());
         vendedor.setEstados(estados);
     }
